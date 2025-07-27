@@ -39,7 +39,7 @@ fn twelwe_days_of_xmas() {
         println!("On the {} day of Christmas,", days[number]);
         println!("my true love sent to me");
 
-        for number2 in (1..number).rev() {
+        for number2 in (1..=number).rev() {
             println!("{},", gifts[number2])
         }
 
