@@ -37,10 +37,44 @@ fn mode(vec: &Vec<i32>) -> i32 {
     return max_count_key;
 }
 
+fn is_latin_word(s: &str) -> bool {
+    s.chars().all(|c| c.is_ascii_alphabetic())
+}
+
+fn str_to_pig_latin(text: &str) -> String {
+    if !is_latin_word(&text) {
+        return String::from("The word is not English");
+    }
+
+    let first_char = match text.chars().next() {
+        Some(c) => c,
+        None => return String::from("Empty string"),
+    };
+
+    let vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+    
+    if vowels.contains(&first_char) {
+        format!("{}-hay", text)
+    }
+    else {
+        let rest: String = text.chars().skip(1).collect();
+        format!("{}-{}ay", rest, first_char)
+    }
+}
+
 fn main() {
     let v = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10];
 
     println!("Average value: {}", average_value(&v));
+
     println!("Median: {}", median(&v));
     println!("Mode: {}", mode(&v));
+
+    println!("Pig Latin first: {}", str_to_pig_latin("first"));
+    println!("Pig Latin apple: {}", str_to_pig_latin("apple"));
+    println!("Pig Latin привет: {}", str_to_pig_latin("привет"));
+
+    
+
+
 }
