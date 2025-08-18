@@ -62,8 +62,43 @@ fn str_to_pig_latin(text: &str) -> String {
     }
 }
 
+fn handle_add(input: &str, company: &mut HashMap<String, Vec<String>>) {
+    let parts: Vec<&str> = input.split_whitespace().collect();
+
+    if parts.len() != 4  || parts[0] != "Add" || parts[2] != "to" {
+        println!("Формат Add name to Departament");
+        return;
+    }
+
+    let name = parts[1].to_string();
+    let departament = parts [3].to_string();
+
+    company.entry(departament).or_default().push(name);
+}
+
+fn handle_list_departament(input: &str, company: &HashMap<String, Vec<String>>) {
+    if let Some(employees) = company.get(input) {
+        println!("{} : {:?}", input, employees);
+    } else {
+        println!("Отдел {} пока пуст.", input);
+    }
+}
+
+fn handle_list_all(company: &HashMap<String, Vec<String>>) {
+    let mut departments: Vec<_> = company.keys().cloned().collect();
+    departments.sort();
+
+    for dep in departments {
+        let mut employees = company[&dep].clone();
+        employees.sort();
+        println!("{}: {:?}", dep, employees);
+    }
+}
+
+
 fn main() {
     let v = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10];
+    let mut company: HashMap<String, Vec<String>> = HashMap::new();
 
     println!("Average value: {}", average_value(&v));
 
@@ -75,6 +110,10 @@ fn main() {
     println!("Pig Latin привет: {}", str_to_pig_latin("привет"));
 
     
+    handle_add("Add Sally to Engineering", &mut company);
+    handle_add("Add Amir to Sales", &mut company);
+    handle_add("Add Andrew to Sales", &mut company);
 
-
+    handle_list_departament("Sales", &company);
+    handle_list_all(&company);
 }
