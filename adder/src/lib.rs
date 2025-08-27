@@ -1,3 +1,11 @@
+pub fn add_two(a: u64) -> u64 {
+    internal_adder(a, 2)
+}
+
+fn internal_adder(left: u64, right: u64) -> u64 {
+    left + right
+}
+
 pub fn add(left: u64, right: u64) -> u64 {
     left + right
 }
