@@ -2,13 +2,18 @@ use std::env;
 use std::fs;
 use std::process;
 use std::error::Error;
-use minigrep::Config;
-use minigrep::search;
+use minigrep::*;
 
 pub fn run(config: Config) -> Result<(), Box<dyn Error>> {
     let contents = fs::read_to_string(config.file_path)?;
 
-    for line in search(&config.query, &contents) {
+    let results = if config.ignore_case {
+        search_case_insensitive(&config.query, &contents)
+    } else {
+        search(&config.query, &contents)
+    };
+
+    for line in results {
         println!("{line}");
     }
 
