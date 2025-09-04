@@ -1,6 +1,4 @@
-# Rust Exercises
-
-![Rust Logo](https://www.rust-lang.org/logos/rust-logo-512x512.png)
+# <img src="https://www.rust-lang.org/logos/rust-logo-512x512.png" alt="Rust Logo" width="30"> Rust Exercises
 
 ## 📚 О проекте
 
