@@ -18,4 +18,8 @@ fn main() {
     };
 
     println!("CustomPointer crated.");
+
+    drop(c);
+
+    println!("CustomPointer dropped before the end of main.");
 }
